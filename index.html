@@ -180,6 +180,15 @@ nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:10
 }
 @media (max-width:409px){.mini .cta span{display:none}}
 
+
+/* away from the screen */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ph{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;background:var(--control);margin:0}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.ph:hover img{transform:scale(1.02)}
+.ph.wide{grid-column:span 2;aspect-ratio:16/9}.ph.wide.tall{aspect-ratio:4/3}
+.ph.sq{aspect-ratio:1/1}.ph.p34{aspect-ratio:3/4}.ph.p79{aspect-ratio:79/90}
+@media (hover:none){.ph:hover img{transform:none}}
 /* touch devices */
 html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 .scroll{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -256,13 +265,28 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
                 <p class="p">I'm Omar, a product designer from Cairo. I came to design the long way: I studied accounting at Helwan University, then moved into UX and sharpened it through ITI's intensive UI/UX program.</p>
                 <p class="p">Five-plus years on, I've designed B2B and B2C products for teams like STC, Momentasoft, Adree and Seam Labs: SaaS platforms, CRMs, fintech apps and logistics tools, across web and mobile.</p>
                 <p class="p">I own the full UX lifecycle, from discovery and user flows to high-fidelity UI, and I build design systems that keep products consistent and ship faster. Much of my work is bilingual, so Arabic and RTL are first-class, not an afterthought.</p>
-                <p class="p">Away from the screen I train and compete in CrossFit. RF9 is my own program, and yes, I designed its app too.</p>
               </div>
             </div>
             <div class="blk ani">
               <h2 class="label">What I bring</h2>
               <div class="chips">
                 <span class="chip">User research</span><span class="chip">User flows</span><span class="chip">Information architecture</span><span class="chip">Design systems</span><span class="chip">Wireframes &amp; prototypes</span><span class="chip">Usability testing</span><span class="chip">Arabic &amp; RTL</span><span class="chip">Figma</span>
+              </div>
+            </div>
+            <div class="blk ani">
+              <h2 class="label">Away from the screen</h2>
+              <p class="p">I'm also a CrossFit athlete. I train most days and compete in functional fitness events around Cairo, from Combat Games and Garage Games to the Alpha X Hybrid Fitness Race, plus the Cairo Marathon. RF9 is my own training program, and yes, I designed its app too.</p>
+              <div class="gal">
+                <figure class="ph wide"><img src="img/about/squat-wide.webp" alt="Holding a front-rack squat with a loaded barbell" loading="lazy" decoding="async"></figure>
+                <figure class="ph sq"><img src="img/about/kettlebell-squat.webp" alt="Double kettlebell front squat at Combat Games" loading="lazy" decoding="async"></figure>
+                <figure class="ph sq"><img src="img/about/rings.webp" alt="Hanging from gymnastic rings at Garage Games" loading="lazy" decoding="async"></figure>
+                <figure class="ph p34"><img src="img/about/kettlebell-carry.webp" alt="Kettlebell farmer’s carry during a competition workout" loading="lazy" decoding="async"></figure>
+                <figure class="ph p34"><img src="img/about/ski-erg.webp" alt="On the ski erg at the Alpha X Hybrid Fitness Race" loading="lazy" decoding="async"></figure>
+                <figure class="ph p34"><img src="img/about/garage-games.webp" alt="Barbell front squat at Garage Games, Cairo" loading="lazy" decoding="async"></figure>
+                <figure class="ph p34"><img src="img/about/rower.webp" alt="Rowing at the Alpha X Hybrid Fitness Race" loading="lazy" decoding="async"></figure>
+                <figure class="ph p79"><img src="img/about/cairo-marathon.webp" alt="Running the Cairo Marathon, smiling at the camera" loading="lazy" decoding="async"></figure>
+                <figure class="ph p79"><img src="img/about/sandbag.webp" alt="Sandbag carry down the race lane" loading="lazy" decoding="async"></figure>
+                <figure class="ph wide tall"><img src="img/about/run.webp" alt="Running between stations at the Alpha X Hybrid Fitness Race" loading="lazy" decoding="async"></figure>
               </div>
             </div>
           </div>
