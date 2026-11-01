@@ -322,10 +322,10 @@ document.querySelectorAll('[data-link]').forEach(a=>{
 
 /* ── Projects (from Figma › Projects page) ── */
 const P = [
+  {f:'02-admore-a',    n:'Ad More',        t:'Website',    d:'Ad performance platform: smart targeting, geolocation and real-time campaign insights.'},
   {f:'10-sasco',       n:'Sasco',          t:'Mobile app', d:'Fuel and retail loyalty app: wallet balance, points, station services and live fuel prices, in Arabic.'},
   {f:'01-aligna',      n:'Aligna',         t:'Web app',    d:'Sign-in experience for a clear-aligner platform.'},
   {f:'11-lulus-1',     n:"Lulu's",         t:'Mobile app', d:'Café ordering app: menu, product customisation, basket and checkout.'},
-  {f:'02-admore-a',    n:'Ad More',        t:'Website',    d:'Ad performance platform: smart targeting, geolocation and real-time campaign insights.'},
   {f:'16-valine-app',  n:'Valine',         t:'Mobile app', d:'Nutrition app: daily calorie intake, meal packages and body measurements.'},
   {f:'09-jusor',       n:'Jusor',          t:'Website',    d:'Freight and logistics company site: services, freight solutions and trade partnerships.'},
   {f:'14-e-wallet',    n:'E‑wallet',       t:'Mobile app', d:'Send and receive money, link bank accounts and wallets, track transactions.'},
@@ -360,10 +360,10 @@ document.getElementById('projectsPage').innerHTML=`
   <div class="blk ani"><h2 class="label">Featured</h2>
     <div class="feature"><div class="thumb"><img src="work/${hero.f}.webp" alt="${hero.n}" loading="lazy"></div>
       <div class="ct"><div style="display:flex;align-items:center;gap:8px"><span class="cn">${hero.n}</span><span class="tag">Featured</span></div><p class="cd">${hero.d}</p>
-      <div class="chips" style="padding-top:4px"><span class="chip">Mobile</span><span class="chip">Loyalty</span><span class="chip">Arabic · RTL</span></div></div></div>
+      <div class="chips" style="padding-top:4px"><span class="chip">Website</span><span class="chip">Ad tech</span><span class="chip">Analytics</span></div></div></div>
   </div>
   <div class="blk ani"><h2 class="label">Mobile</h2><div class="pgrid">${mob.filter(p=>p!==hero).map(card).join('')}</div></div>
-  <div class="blk ani"><h2 class="label">Web</h2><div class="pgrid">${web.map(card).join('')}</div></div>`;
+  <div class="blk ani"><h2 class="label">Web</h2><div class="pgrid">${web.filter(p=>p!==hero).map(card).join('')}</div></div>`;
 
 /* ── Theme ── */
 const root=document.documentElement;
