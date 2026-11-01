@@ -354,13 +354,13 @@ feed.innerHTML=P.map((p,i)=>{
 const seen=new Set(), uniq=P.filter(p=>!seen.has(p.n+p.t)&&seen.add(p.n+p.t));
 const web=uniq.filter(p=>p.t!=='Mobile app'), mob=uniq.filter(p=>p.t==='Mobile app');
 const card=p=>`<div class="card"><div class="thumb"><img src="work/${p.f}.webp" alt="${p.n}" loading="lazy" decoding="async"></div><div class="ct"><div class="jr"><span class="cn">${p.n}</span><span class="meta">${p.t}</span></div><p class="cd">${p.d}</p></div></div>`;
-const hero=uniq[0];
+const hero=uniq.find(p=>p.n==='RF9')||uniq[0];
 document.getElementById('projectsPage').innerHTML=`
   <header class="ani"><h1>Projects</h1><p class="lede">Products I've shaped across fintech, logistics, food, health and SaaS. Web and mobile, Arabic and English.</p></header>
   <div class="blk ani"><h2 class="label">Featured</h2>
     <div class="feature"><div class="thumb"><img src="work/${hero.f}.webp" alt="${hero.n}" loading="lazy"></div>
       <div class="ct"><div style="display:flex;align-items:center;gap:8px"><span class="cn">${hero.n}</span><span class="tag">Featured</span></div><p class="cd">${hero.d}</p>
-      <div class="chips" style="padding-top:4px"><span class="chip">Website</span><span class="chip">Ad tech</span><span class="chip">Analytics</span></div></div></div>
+      <div class="chips" style="padding-top:4px"><span class="chip">Mobile</span><span class="chip">Fitness</span><span class="chip">Personal project</span></div></div></div>
   </div>
   <div class="blk ani"><h2 class="label">Mobile</h2><div class="pgrid">${mob.filter(p=>p!==hero).map(card).join('')}</div></div>
   <div class="blk ani"><h2 class="label">Web</h2><div class="pgrid">${web.filter(p=>p!==hero).map(card).join('')}</div></div>`;
@@ -424,6 +424,15 @@ function onScroll(){
 scroller.addEventListener('scroll',onScroll,{passive:true});
 addEventListener('resize',()=>{measure();onScroll()});
 measure();
+
+/* ── Click sound ── */
+const Click=(()=>{let ctx=null,buf=null,loading=null;
+  const load=()=>loading||(loading=(async()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;ctx=new AC();
+    const r=await fetch('sounds/click.wav');buf=await ctx.decodeAudioData(await r.arrayBuffer());}catch(e){}})());
+  const idle=()=>('requestIdleCallback' in window)?requestIdleCallback(load,{timeout:4000}):setTimeout(load,1500);
+  if(document.readyState==='complete')idle();else addEventListener('load',idle,{once:true});
+  const play=()=>{try{if(!buf){load().then(()=>{if(buf)play()});return}if(ctx.state==='suspended')ctx.resume();const s=ctx.createBufferSource(),g=ctx.createGain();g.gain.value=0.3;s.buffer=buf;s.connect(g).connect(ctx.destination);s.start();}catch(e){}};return {play};})();
+document.addEventListener('click',e=>{if(e.target.closest('.dk,.cta,.soc a,#toggle,.logo'))Click.play();},true);
 route();
 </script>
 
