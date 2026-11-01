@@ -385,7 +385,8 @@ document.getElementById('mail').addEventListener('click',()=>{
 /* ── Mobile collapsing header (matches the reference) ── */
 const side=document.getElementById('side'), col=document.getElementById('collapse'), mini=document.getElementById('mini');
 const mq=matchMedia('(max-width:1023px)');
-function extra(){const w=innerWidth;return w<410?173:w<726?154:134}
+let EXTRA=154;function measure(){if(!mq.matches)return;const h=col.style.height;col.style.height='auto';EXTRA=Math.ceil(col.scrollHeight);col.style.height=h;}
+function extra(){return EXTRA}
 function onScroll(){
   if(!mq.matches){side.style.removeProperty('--p');col.style.height='';return}
   const E=extra();scroller.style.setProperty('--extra',E+'px');
@@ -394,6 +395,7 @@ function onScroll(){
   mini.classList.toggle('on',p>.5);
 }
 scroller.addEventListener('scroll',onScroll,{passive:true});
-addEventListener('resize',onScroll);
+addEventListener('resize',()=>{measure();onScroll()});
+measure();
 route();
 </script>
