@@ -6,8 +6,6 @@
 <meta name="theme-color" content="#0f0f0f">
 <link rel="icon" type="image/png" href="/img/favicon.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="alternate" hreflang="en" href="https://omarhesham-two.vercel.app/">
-<link rel="alternate" hreflang="ar" href="https://omarhesham-two.vercel.app/ar">
 <link rel="canonical" href="https://omarhesham-two.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Omar Hesham">
@@ -293,7 +291,6 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
     <a class="me" href="#" data-route="work" aria-label="Omar Hesham — home"><img src="img/avatar-192.webp" alt="" width="32" height="32"><span>Omar Hesham</span></a>
     <div class="sp"></div>
     <span class="status"><i aria-hidden="true"></i>Available for projects</span>
-    <a class="icon-btn lang" id="lang" href="/ar" hreflang="ar" lang="ar" aria-label="العربية">ع</a>
     <button class="icon-btn" id="toggle" type="button" aria-label="Toggle theme">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -482,9 +479,6 @@ document.getElementById('toggle').onclick=()=>{theme=root.dataset.theme==='dark'
 const clockEl=document.getElementById('clock');
 const tick=()=>{try{clockEl.textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Africa/Cairo'}).format(new Date());}catch(e){clockEl.textContent='GMT+2'}};
 tick();setInterval(tick,15000);
-
-/* Language switch keeps the current page */
-document.getElementById('lang').addEventListener('click',e=>{e.currentTarget.href=e.currentTarget.getAttribute('href').split('#')[0]+location.hash;});
 
 /* Sticky bar border */
 const bar=document.getElementById('bar');addEventListener('scroll',()=>bar.classList.toggle('stuck',scrollY>8),{passive:true});
