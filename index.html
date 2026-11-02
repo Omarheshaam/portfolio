@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#0f0f0f">
 <link rel="icon" type="image/png" href="/img/favicon.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="https://omarhesham-two.vercel.app/">
+<link rel="alternate" hreflang="ar" href="https://omarhesham-two.vercel.app/ar">
 <link rel="canonical" href="https://omarhesham-two.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Omar Hesham">
@@ -68,6 +70,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .icon-btn:hover{color:var(--accent);border-color:var(--accent)}
 .icon-btn svg{width:17px;height:17px}
 .icon-btn .moon{display:none}
+.icon-btn.lang{font:600 14px/1 "IBM Plex Sans Arabic",var(--sans);color:var(--fg2)}
 :root[data-theme="light"] .icon-btn .sun{display:none}:root[data-theme="light"] .icon-btn .moon{display:block}
 
 /* ── views ── */
@@ -290,6 +293,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
     <a class="me" href="#" data-route="work" aria-label="Omar Hesham — home"><img src="img/avatar-192.webp" alt="" width="32" height="32"><span>Omar Hesham</span></a>
     <div class="sp"></div>
     <span class="status"><i aria-hidden="true"></i>Available for projects</span>
+    <a class="icon-btn lang" id="lang" href="/ar" hreflang="ar" lang="ar" aria-label="العربية">ع</a>
     <button class="icon-btn" id="toggle" type="button" aria-label="Toggle theme">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
@@ -409,6 +413,8 @@ document.querySelectorAll('[data-link]').forEach(a=>{const k=a.dataset.link,v=LI
 const TAGS={'Ad More':['Website','Ad tech','Analytics'],'Sasco':['Mobile','Loyalty','Arabic · RTL'],'Aligna':['Web app','Health','Sign-in'],"Lulu's":['Mobile','Food & retail','Ordering'],'Valine|Mobile app':['Mobile','Health','Nutrition'],'Jusor':['Website','Logistics'],'E‑wallet':['Mobile','Fintech','Payments'],'KACCC':['Website','Culture','Arabic · RTL'],'RF9':['Mobile','Fitness','Personal project'],'Broker el Arab':['Website','Fintech','Arabic · RTL'],'EZ Insurance':['Web app','Insurance','Payments'],'Bosts':['Mobile','Logistics','Merchants'],'Alyusr':['Website','Fintech','Arabic · RTL'],'Gold Bullion':['Mobile','Fintech','Arabic · RTL'],'Adree':['Website','B2B','SaaS'],'Valine|Website':['Website','Food & retail']};
 /* Case studies: CASE['RF9']={problem:'…',approach:'…',outcome:'…'} — shown only when present */
 const CASE={};
+/* Translation hooks (filled in the Arabic build) */
+const TT={},TAGT={},DT={};const tt=t=>TT[t]||t;
 const P=[
   {f:'02-admore-a',n:'Ad More',t:'Website',d:'Ad performance platform: smart targeting, geolocation and real-time campaign insights.'},
   {f:'10-sasco',n:'Sasco',t:'Mobile app',d:'Fuel and retail loyalty app: wallet balance, points, station services and live fuel prices, in Arabic.'},
@@ -430,7 +436,8 @@ const P=[
   {f:'08-valine',n:'Valine',t:'Website',d:'Healthy food brand website.'}
 ];
 const GROUPS=[];{const m=new Map();for(const p of P){const k=p.n+'|'+p.t;if(!m.has(k)){m.set(k,{k,n:p.n,t:p.t,d:'',shots:[]});GROUPS.push(m.get(k));}const g=m.get(k);g.shots.push(p.f);if(!g.d&&p.d)g.d=p.d;}}
-const tagsOf=g=>TAGS[g.k]||TAGS[g.n]||[g.t];
+GROUPS.forEach(g=>{if(DT[g.k])g.d=DT[g.k]});
+const tagsOf=g=>(TAGS[g.k]||TAGS[g.n]||[g.t]).map(x=>TAGT[x]||x);
 const pad=n=>String(n).padStart(2,'0');
 const GO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>';
 
@@ -464,7 +471,7 @@ document.getElementById('projectsPage').innerHTML=`
       <div><span class="tag">Featured</span><h3>${hero.n}</h3><p>${hero.d}</p><div class="chips">${tagsOf(hero).map(c=>`<span class="chip">${c}</span>`).join('')}</div></div>
     </div></div>
   ${[['Mobile',g=>g.t==='Mobile app'],['Web',g=>g.t!=='Mobile app']].map(([lab,fn])=>`<div class="block"><h2 class="label">${lab}</h2><div class="pgrid">${GROUPS.filter(g=>g!==hero&&fn(g)).map((g,i)=>`
-    <div class="card reveal" style="--d:${(i%3)*.06}s" data-open="${g.k}" role="button" tabindex="0" aria-label="Open ${g.n}"><div class="th"><img src="work/${g.shots[0]}.webp" alt="${g.n}" loading="lazy" decoding="async"></div><div class="cn"><b>${g.n}</b><span>${g.t}</span></div>${g.d?`<p>${g.d}</p>`:''}</div>`).join('')}</div></div>`).join('')}`;
+    <div class="card reveal" style="--d:${(i%3)*.06}s" data-open="${g.k}" role="button" tabindex="0" aria-label="Open ${g.n}"><div class="th"><img src="work/${g.shots[0]}.webp" alt="${g.n}" loading="lazy" decoding="async"></div><div class="cn"><b>${g.n}</b><span>${tt(g.t)}</span></div>${g.d?`<p>${g.d}</p>`:''}</div>`).join('')}</div></div>`).join('')}`;
 
 /* Theme */
 const root=document.documentElement;let theme='dark';try{theme=localStorage.getItem('theme')||'dark'}catch(e){}
@@ -475,6 +482,9 @@ document.getElementById('toggle').onclick=()=>{theme=root.dataset.theme==='dark'
 const clockEl=document.getElementById('clock');
 const tick=()=>{try{clockEl.textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Africa/Cairo'}).format(new Date());}catch(e){clockEl.textContent='GMT+2'}};
 tick();setInterval(tick,15000);
+
+/* Language switch keeps the current page */
+document.getElementById('lang').addEventListener('click',e=>{e.currentTarget.href=e.currentTarget.getAttribute('href').split('#')[0]+location.hash;});
 
 /* Sticky bar border */
 const bar=document.getElementById('bar');addEventListener('scroll',()=>bar.classList.toggle('stuck',scrollY>8),{passive:true});
@@ -519,7 +529,7 @@ pv.innerHTML=`<div class="pv-scrim" data-close></div><div class="pv-sheet" role=
 document.body.appendChild(pv);
 let cur=-1,lastFocus=null;const $=id=>pv.querySelector('#'+id);
 function show(i,shot){cur=(i+GROUPS.length)%GROUPS.length;const g=GROUPS[cur];const s=shot&&g.shots.includes(shot)?shot:g.shots[0];
-  $('pvN').textContent=`${pad(cur+1)} / ${pad(GROUPS.length)}`;$('pvT').textContent=g.n;$('pvM').textContent=g.t+(g.shots.length>1?` · ${g.shots.length} screens`:'');
+  $('pvN').textContent=`${pad(cur+1)} / ${pad(GROUPS.length)}`;$('pvT').textContent=g.n;$('pvM').textContent=tt(g.t)+(g.shots.length>1?` · ${g.shots.length} ${tt('screens')}`:'');
   $('pvI').src='work/'+s+'.webp';$('pvI').alt=g.n+' — '+(g.d||g.t);
   $('pvS').innerHTML=g.shots.length>1?g.shots.map(f=>`<button type="button" data-shot="${f}" class="${f===s?'on':''}" aria-label="Show screen"><img src="work/${f}.webp" alt=""></button>`).join(''):'';
   $('pvD').textContent=g.d;$('pvC').innerHTML=tagsOf(g).map(c=>`<span class="chip">${c}</span>`).join('');
