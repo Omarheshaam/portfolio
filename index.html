@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Omar Hesham — Product Designer in Cairo. SaaS, fintech, e‑learning and AI‑powered products, and the design systems behind them.">
 <meta name="twitter:image" content="https://omarhesham-two.vercel.app/img/og.jpg">
 <title>Omar Hesham — Product Designer</title>
-<meta name="description" content="Omar Hesham — Senior Product Designer and CrossFit athlete in Cairo. SaaS, fintech, e‑learning and AI‑powered products.">
+<meta name="description" content="Omar Hesham — Senior Product Designer in Cairo. SaaS, fintech, e‑learning and AI‑powered products.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -102,7 +102,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .board{border:1px solid var(--border);border-radius:20px;background:var(--surface);overflow:hidden}
 .board-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--fg3)}
 .board-h .rec{display:inline-flex;align-items:center;gap:6px;color:var(--fg2)}
-.board-h .rec::before{content:"";width:6px;height:6px;border-radius:50%;background:#ef4444;animation:blink 1.6s steps(2,start) infinite}
+.board-h .rec::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
 @keyframes blink{to{visibility:hidden}}
 .stat{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
 .stat:last-child{border-bottom:0}
@@ -164,7 +164,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ath h3 em{font:italic 400 .6em/1 var(--serif);color:var(--accent);text-transform:none}
 .ath p{margin:0;font-size:16px;line-height:1.7;color:var(--fg2)}
 
-/* experience scoreboard */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.steps li{display:flex;flex-direction:column;gap:10px;padding:20px;border:1px solid var(--border);border-radius:20px;background:var(--surface)}
+.steps span{font:500 12px/1 var(--mono);letter-spacing:.12em;color:var(--accent)}
+.steps h3{margin:0;font:400 34px/.95 var(--display);text-transform:uppercase;color:var(--fg1);letter-spacing:.02em}
+.steps p{margin:0;font-size:14px;line-height:1.6;color:var(--fg2)}
+.aside{margin:0;max-width:620px;font-size:15px;line-height:1.65;color:var(--fg2)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+/* experience */
 .score{border:1px solid var(--border);border-radius:20px;overflow:hidden;background:var(--surface)}
 .row{display:grid;grid-template-columns:150px minmax(0,1.2fr) minmax(0,1fr) 140px;gap:16px;align-items:baseline;padding:18px 20px;border-top:1px solid var(--border)}
 .row:first-child{border-top:0}
@@ -294,7 +302,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   <div class="view" data-view="work">
     <section class="wrap hero">
       <div class="hero-l">
-        <p class="eyebrow">Senior Product Designer <b>×</b> CrossFit athlete · Cairo</p>
+        <p class="eyebrow">Senior Product Designer <b>·</b> SaaS, fintech &amp; e‑learning · Cairo</p>
         <h1 class="name" aria-label="Omar Hesham"><span><i>Omar</i></span><span><i>Hesham</i></span></h1>
         <p class="motto">Design <em>with intention.</em></p>
         <p class="lead">I design clear, scalable products for SaaS, fintech and e‑learning teams, from AI‑powered experiences to the design systems behind them.</p>
@@ -304,7 +312,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
         </div>
       </div>
       <aside class="board" aria-label="At a glance">
-        <div class="board-h"><span>Scoreboard</span><span class="rec">Live</span></div>
+        <div class="board-h"><span>At a glance</span><span class="rec">Open to work</span></div>
         <div class="stat"><b>05+</b><span>Years<br>designing</span></div>
         <div class="stat"><b id="projCount">16</b><span>Projects<br>shown</span></div>
         <div class="stat"><b>08</b><span>Product<br>teams</span></div>
@@ -313,12 +321,12 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
     </section>
 
     <section class="wrap">
-      <div class="shead"><h2>The work</h2><span class="label" id="repCount"></span></div>
+      <div class="shead"><h2>Selected work</h2><span class="label" id="repCount"></span></div>
       <div class="reps" id="reps"></div>
     </section>
 
     <section class="wrap finish">
-      <p class="eyebrow">Next set</p>
+      <p class="eyebrow">What's next</p>
       <h2>Let's build<br>something <em>real.</em></h2>
       <div class="ctas">
         <a class="btn pri" data-link="call" href="#">Book a call</a>
@@ -334,7 +342,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   <!-- ABOUT -->
   <div class="view" data-view="about">
     <div class="wrap">
-      <div class="phead"><p class="eyebrow">About</p><h1 class="page-title">Designer.<br>Athlete.</h1></div>
+      <div class="phead"><p class="eyebrow">About</p><h1 class="page-title">Product<br>Designer.</h1></div>
       <div class="about-grid block">
         <div class="portrait reveal"><img src="img/portrait-480.webp" alt="Omar Hesham smiling, arms crossed, in a black polo"></div>
         <div class="about-text reveal" style="--d:.08s">
@@ -347,9 +355,16 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
       <div class="block reveal"><h2 class="label">What I bring</h2>
         <div class="chips"><span class="chip">User research</span><span class="chip">User flows</span><span class="chip">Information architecture</span><span class="chip">Design systems</span><span class="chip">Wireframes &amp; prototypes</span><span class="chip">Usability testing</span><span class="chip">Arabic &amp; RTL</span><span class="chip">Figma</span></div>
       </div>
-      <div class="block">
-        <div class="ath reveal"><h3>Away from<br>the screen <em>I compete.</em></h3>
-          <p>I'm also a CrossFit athlete. I train most days and compete in functional fitness events around Cairo, from Combat Games and Garage Games to the Alpha X Hybrid Fitness Race, plus the Cairo Marathon. RF9 is my own training program, and yes, I designed its app too.</p></div>
+      <div class="block reveal"><h2 class="label">How I work</h2>
+        <ol class="steps">
+          <li><span>01</span><h3>Understand</h3><p>Talk to users and stakeholders, read the data, and agree on the problem worth solving before any screens.</p></li>
+          <li><span>02</span><h3>Map</h3><p>Turn it into user flows, information architecture and edge cases, so the team sees the whole product, not just the happy path.</p></li>
+          <li><span>03</span><h3>Design</h3><p>Prototype, test and refine high-fidelity UI built on a shared design system, in English and Arabic.</p></li>
+          <li><span>04</span><h3>Ship</h3><p>Hand off clean specs, stay close to engineering through build, and measure what changed after launch.</p></li>
+        </ol>
+      </div>
+      <div class="block reveal"><h2 class="label">Outside work</h2>
+        <p class="aside">When I'm not designing, I'm usually training. It keeps me disciplined, consistent and comfortable with hard feedback.</p>
         <div class="gal" id="gal"></div>
       </div>
     </div>
@@ -358,7 +373,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   <!-- EXPERIENCE -->
   <div class="view" data-view="experience">
     <div class="wrap">
-      <div class="phead"><p class="eyebrow">Experience</p><h1 class="page-title">The<br>Record.</h1>
+      <div class="phead"><p class="eyebrow">Experience</p><h1 class="page-title">Experience.</h1>
         <p class="lede">Five-plus years designing B2B and B2C products across web and mobile, from discovery and user flows to high-fidelity UI and the design systems behind them.</p></div>
       <div class="block reveal"><h2 class="label">Where I've worked</h2>
         <div class="score" id="jobs"></div></div>
@@ -403,7 +418,7 @@ const P=[
   {f:'09-jusor',n:'Jusor',t:'Website',d:'Freight and logistics company site: services, freight solutions and trade partnerships.'},
   {f:'14-e-wallet',n:'E‑wallet',t:'Mobile app',d:'Send and receive money, link bank accounts and wallets, track transactions.'},
   {f:'04-kaccc',n:'KACCC',t:'Website',d:'Arabic website for the King Abdulaziz Center for Civilizational Communication.'},
-  {f:'18-rf9',n:'RF9',t:'Mobile app',d:'CrossFit training app for my own program: daily workouts, competitions and leaderboards.'},
+  {f:'18-rf9',n:'RF9',t:'Mobile app',d:'Fitness training app: daily workouts, competitions and live leaderboards, designed end to end.'},
   {f:'07-broker-el-arab',n:'Broker el Arab',t:'Website',d:'Helps Arabic-speaking traders compare and review brokerage firms.'},
   {f:'12-lulus-2',n:"Lulu's",t:'Mobile app',d:''},
   {f:'05-ez-insurance',n:'EZ Insurance',t:'Web app',d:'Policy summary and payment flow for an insurance product.'},
@@ -420,17 +435,17 @@ const pad=n=>String(n).padStart(2,'0');
 const GO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>';
 
 /* Work — numbered reps */
-document.getElementById('repCount').textContent=`${pad(GROUPS.length)} reps · tap to open`;
+document.getElementById('repCount').textContent=`${pad(GROUPS.length)} projects · tap to open`;
 document.getElementById('projCount').textContent=pad(GROUPS.length);
 document.getElementById('reps').innerHTML=GROUPS.map((g,i)=>`
   <button type="button" class="rep reveal" data-open="${g.k}" aria-label="Open ${g.n}">
-    <div class="rep-head"><span class="rep-n">REP ${pad(i+1)}</span><h3 class="rep-name">${g.n}</h3><span class="rep-meta">${tagsOf(g).join(' · ')}</span><span class="rep-go">${GO}</span></div>
+    <div class="rep-head"><span class="rep-n">${pad(i+1)} /</span><h3 class="rep-name">${g.n}</h3><span class="rep-meta">${tagsOf(g).join(' · ')}</span><span class="rep-go">${GO}</span></div>
     <div class="rep-img"><img src="work/${g.shots[0]}.webp" alt="${g.n} — ${(g.d||g.t).replace(/"/g,'')}" ${i>0?'loading="lazy"':''} decoding="async" width="1640" height="1230"></div>
     ${g.d?`<p class="rep-desc">${g.d}</p>`:''}
   </button>`).join('');
 
 /* About — gallery */
-const PH=[['w4','squat-wide','Holding a front-rack squat with a loaded barbell'],['','kettlebell-squat','Double kettlebell front squat at Combat Games'],['','rings','Hanging from gymnastic rings at Garage Games'],['','kettlebell-carry','Kettlebell farmer’s carry during a competition workout'],['','ski-erg','On the ski erg at the Alpha X Hybrid Fitness Race'],['w2','cairo-marathon','Running the Cairo Marathon, smiling at the camera'],['','garage-games','Barbell front squat at Garage Games, Cairo'],['','rower','Rowing at the Alpha X Hybrid Fitness Race'],['w2','run','Running between stations at the Alpha X Hybrid Fitness Race'],['w2','sandbag','Sandbag carry down the race lane']];
+const PH=[['','kettlebell-squat','Omar training with kettlebells'],['','rings','Omar on gymnastic rings'],['','rower','Omar on a rowing machine'],['','run','Omar running']];
 document.getElementById('gal').innerHTML=PH.map(([c,f,a],i)=>`<figure class="ph ${c} reveal" style="--d:${(i%4)*.05}s"><img src="img/about/${f}.webp" alt="${a}" loading="lazy" decoding="async"></figure>`).join('');
 
 /* Experience — scoreboard */
@@ -504,7 +519,7 @@ pv.innerHTML=`<div class="pv-scrim" data-close></div><div class="pv-sheet" role=
 document.body.appendChild(pv);
 let cur=-1,lastFocus=null;const $=id=>pv.querySelector('#'+id);
 function show(i,shot){cur=(i+GROUPS.length)%GROUPS.length;const g=GROUPS[cur];const s=shot&&g.shots.includes(shot)?shot:g.shots[0];
-  $('pvN').textContent=`Rep ${pad(cur+1)} / ${pad(GROUPS.length)}`;$('pvT').textContent=g.n;$('pvM').textContent=g.t+(g.shots.length>1?` · ${g.shots.length} screens`:'');
+  $('pvN').textContent=`${pad(cur+1)} / ${pad(GROUPS.length)}`;$('pvT').textContent=g.n;$('pvM').textContent=g.t+(g.shots.length>1?` · ${g.shots.length} screens`:'');
   $('pvI').src='work/'+s+'.webp';$('pvI').alt=g.n+' — '+(g.d||g.t);
   $('pvS').innerHTML=g.shots.length>1?g.shots.map(f=>`<button type="button" data-shot="${f}" class="${f===s?'on':''}" aria-label="Show screen"><img src="work/${f}.webp" alt=""></button>`).join(''):'';
   $('pvD').textContent=g.d;$('pvC').innerHTML=tagsOf(g).map(c=>`<span class="chip">${c}</span>`).join('');
