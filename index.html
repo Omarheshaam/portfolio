@@ -182,11 +182,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .marquee+.marquee{margin-top:28px}
 .marquee.rev .track{animation-direction:reverse;animation-duration:90s}
 .brand{display:flex;align-items:center;margin-right:64px;color:var(--fg3);transition:color .3s}
-.brand i{display:block;height:var(--h);width:min(190px,calc(var(--h)*var(--a)));background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.lgw{position:relative;display:block;flex:none;height:var(--h);width:min(190px,calc(var(--h)*var(--a)))}
+.lgw i{position:absolute;inset:0;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;transition:opacity .35s var(--ease)}
+.lgw img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.96);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.team:hover .lgw i,.brand:hover .lgw i{opacity:0}
+.team:hover .lgw img,.brand:hover .lgw img{opacity:1;transform:none}
 .brand:hover{color:var(--fg1)}
 @keyframes marq{to{transform:translateX(-50%)}}
 .team{display:flex;align-items:center;gap:14px;margin-right:64px;color:var(--fg3);transition:color .3s}
-.team i{display:block;height:36px;width:calc(36px*var(--a));background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.team .lgw{--h:36px}
 .team b{font:400 30px/1 var(--display);color:inherit;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
 .team:hover{color:var(--fg1)}
 @media (prefers-reduced-motion:reduce){.track{animation:none;flex-wrap:wrap;width:auto;row-gap:12px}.track [aria-hidden]{display:none}.marquee{-webkit-mask-image:none;mask-image:none}}
@@ -276,8 +280,8 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   .row.head .h-ro{display:none}
 }
 @media (max-width:640px){
-  .brand{margin-right:44px}.brand i{height:calc(var(--h)*.8);width:min(150px,calc(var(--h)*.8*var(--a)))}
-  .team{margin-right:44px;gap:10px}.team i{height:28px;width:calc(28px*var(--a))}.team b{font-size:24px}
+  .brand{margin-right:44px}.brand .lgw{height:calc(var(--h)*.8);width:min(150px,calc(var(--h)*.8*var(--a)))}
+  .team{margin-right:44px;gap:10px}.team .lgw{--h:28px}.team b{font-size:24px}
   .bar .wrap{height:calc(56px + env(safe-area-inset-top,0px))}
   .me span{display:none}
   .status{padding:4px 10px 4px 8px;font-size:11.5px}
@@ -484,11 +488,11 @@ const rowHTML=([y,c,r,t,d,now])=>`<div class="row${now?' now':''}"><span class="
 document.getElementById('jobs').innerHTML=`<div class="row head"><span>Years</span><span>Team</span><span class="h-ro">Role</span><span style="text-align:right">Type</span></div>`+JOBS.map(rowHTML).join('');
 /* Teams marquee (from the experience list) */
 const MARK={"momentasoft": 2.458, "adree": 1.062, "ticlick": 3.823, "stc": 1.99, "seam-labs": 1.0, "devexy": 3.562, "t-tech": 1.021, "royal-techni": 1.146},WORDMARK=['ticlick','stc','devexy','royal-techni'];
-const teamHTML=(hide)=>JOBS.map(([y,c])=>{const k=LOGO[c],w=WORDMARK.includes(k);return `<div class="team"${hide?' aria-hidden="true"':''}><i style="--a:${MARK[k]};--m:url(img/logos/mark-${k}.png)" role="img" aria-label="${hide?'':c}"></i>${w?'':`<b>${c}</b>`}</div>`}).join('');
+const teamHTML=(hide)=>JOBS.map(([y,c])=>{const k=LOGO[c],w=WORDMARK.includes(k);return `<div class="team"${hide?' aria-hidden="true"':''}><span class="lgw" style="--a:${MARK[k]}"><i style="--m:url(img/logos/mark-${k}.png)" role="img" aria-label="${hide?'':c}"></i><img src="img/logos/col-${k}.png" alt="" loading="lazy" decoding="async"></span>${w?'':`<b>${c}</b>`}</div>`}).join('');
 document.getElementById('logos').innerHTML=teamHTML(false)+teamHTML(true);
 /* Brands I've designed for (second row, opposite direction) */
 const BRANDS=[["imam", 1.2, "Imam Mohammad Ibn Saud Islamic University"], ["kaccc", 5.9, "King Abdulaziz Center for Cultural Communication"], ["sasco", 1.417, "SASCO"], ["nayifat", 2.708, "Nayifat"], ["bosta", 0.908, "Bosta"], ["jusor", 3.608, "Jusor"], ["gold-bullion", 1.025, "Gold Bullion"], ["broker-el-arab", 3.117, "Broker el Arab"], ["alyusr", 1.608, "Alyusr"], ["ez-insurance", 8.175, "EZ Insurance"], ["abbas", 3.6, "Abbas Global Law Firm"], ["aligna", 4.608, "Aligna"], ["valine", 2.183, "Valine"], ["lulus", 3.333, "Lulu's"], ["estaraht", 2.017, "Estaraht"], ["sparkle", 1.942, "Sparkle Dental Clinics"], ["core", 3.325, "Core"], ["fadil", 1.95, "Fadil"], ["waqf", 2.167, "Burger Waqf"], ["desert-week", 1.058, "Desert Week"], ["mark-x", 1.0, "Client logo"]];
-const brandHTML=(hide)=>BRANDS.map(([k,a,n])=>`<div class="brand"${hide?' aria-hidden="true"':''}><i style="--a:${a};--h:${a<1.4?56:a<3?42:32}px;--m:url(img/logos/mark-${k}.png)" role="img" aria-label="${hide?'':n}"></i></div>`).join('');
+const brandHTML=(hide)=>BRANDS.map(([k,a,n])=>`<div class="brand"${hide?' aria-hidden="true"':''}><span class="lgw" style="--a:${a};--h:${a<1.4?56:a<3?42:32}px"><i style="--m:url(img/logos/mark-${k}.png)" role="img" aria-label="${hide?'':n}"></i><img src="img/logos/col-${k}.png" alt="" loading="lazy" decoding="async"></span></div>`).join('');
 document.getElementById('brands').innerHTML=brandHTML(false)+brandHTML(true);
 document.getElementById('edu').innerHTML=[['2021','ITI','UI/UX Designer Intensive Training Program','Cairo'],['2015 · 2019','Helwan University','Bachelor of Commerce, Accounting','Cairo']].map(rowHTML).join('');
 
