@@ -26,8 +26,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --canvas:#0c0c0d;--surface:#141415;--elevated:#19191a;--control:#222224;--border:#2a2a2c;
-  --fg1:#f5f5f4;--fg2:#b9b8b6;--fg3:#7f7e7c;
+  --canvas:#0f0f0f;--surface:#161616;--elevated:#1a1a1a;--control:#222;--border:#292929;
+  --fg1:#fff;--fg2:#bab9b9;--fg3:#828282;
   --accent:#8b6cff;--accent-soft:rgba(139,108,255,.16);--ok:#34d399;
   --display:"Bebas Neue","Arial Narrow",Impact,sans-serif;
   --serif:"Cormorant Garamond",Georgia,serif;
@@ -37,8 +37,8 @@
   --gut:max(20px,env(safe-area-inset-left,0px));--gutR:max(20px,env(safe-area-inset-right,0px));
   color-scheme:dark;
 }
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--canvas:#efeeec;--surface:#ffffff;--elevated:#f7f6f4;--control:#e9e8e5;--border:#dcdad6;--fg1:#111111;--fg2:#3d3c3a;--fg3:#6d6b68;--accent:#5b35bc;--accent-soft:rgba(91,53,188,.12);--ok:#059669;color-scheme:light}}
-:root[data-theme="light"]{--canvas:#efeeec;--surface:#ffffff;--elevated:#f7f6f4;--control:#e9e8e5;--border:#dcdad6;--fg1:#111111;--fg2:#3d3c3a;--fg3:#6d6b68;--accent:#5b35bc;--accent-soft:rgba(91,53,188,.12);--ok:#059669;color-scheme:light}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--canvas:#ececec;--surface:#fff;--elevated:#f7f7f7;--control:#e4e4e4;--border:#e4e4e4;--fg1:#0f0f0f;--fg2:#404040;--fg3:#6e6e6e;--accent:#5b35bc;--accent-soft:rgba(91,53,188,.12);--ok:#059669;color-scheme:light}}
+:root[data-theme="light"]{--canvas:#ececec;--surface:#fff;--elevated:#f7f7f7;--control:#e4e4e4;--border:#e4e4e4;--fg1:#0f0f0f;--fg2:#404040;--fg3:#6e6e6e;--accent:#5b35bc;--accent-soft:rgba(91,53,188,.12);--ok:#059669;color-scheme:light}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -158,7 +158,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ph{position:relative;margin:0;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--control);aspect-ratio:3/4}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .ph:hover img{transform:scale(1.03)}
-.ph.w2{grid-column:span 2;aspect-ratio:auto}
+.ph.w2{grid-column:span 2;aspect-ratio:3/2}
 .ph.w4{grid-column:span 4;aspect-ratio:21/9}
 .ath{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end}
 .ath h3{margin:0;font:400 clamp(48px,7vw,96px)/.88 var(--display);color:var(--fg1);text-transform:uppercase}
@@ -477,7 +477,7 @@ document.getElementById('reps').innerHTML=GROUPS.map((g,i)=>`
   </button>`).join('');
 
 /* About — gallery */
-const PH=[['','kettlebell-squat','Omar training with kettlebells'],['','rings','Omar on gymnastic rings'],['','rower','Omar on a rowing machine'],['','run','Omar running']];
+const PH=[['w4','squat-wide','Holding a front-rack squat with a loaded barbell'],['','kettlebell-squat','Double kettlebell front squat at Combat Games'],['','rings','Hanging from gymnastic rings at Garage Games'],['','kettlebell-carry','Kettlebell farmer’s carry during a competition workout'],['','ski-erg','On the ski erg at the Alpha X Hybrid Fitness Race'],['w2','cairo-marathon','Running the Cairo Marathon, smiling at the camera'],['','garage-games','Barbell front squat at Garage Games, Cairo'],['','rower','Rowing at the Alpha X Hybrid Fitness Race'],['w2','run','Running between stations at the Alpha X Hybrid Fitness Race'],['w2','sandbag','Sandbag carry down the race lane']];
 document.getElementById('gal').innerHTML=PH.map(([c,f,a],i)=>`<figure class="ph ${c} reveal" style="--d:${(i%4)*.05}s"><img src="img/about/${f}.webp" alt="${a}" loading="lazy" decoding="async"></figure>`).join('');
 
 /* Experience — scoreboard */
