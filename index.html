@@ -111,6 +111,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .stat span{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--fg3);text-align:right}
 .stat.clock b{color:var(--accent)}
 
+.hero-r{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hero-photo{margin:0;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:#4b2bb5}
+.hero-photo img{width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);animation:photoIn 1s var(--ease) .15s forwards}
+@keyframes photoIn{to{opacity:1;transform:none}}
 /* section head */
 .shead{display:flex;align-items:end;justify-content:space-between;gap:16px;padding:20px 0 18px;border-top:1px solid var(--border)}
 .shead h2{margin:0;font:400 clamp(40px,6vw,72px)/.9 var(--display);color:var(--fg1);text-transform:uppercase;letter-spacing:.01em}
@@ -260,12 +264,13 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
 /* ── motion ── */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease) var(--d,0s),transform .8s var(--ease) var(--d,0s)}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.name span>i{animation:none;transform:none}.status i::after,.board-h .rec::before{animation:none}.blob,.rep-img img,.card .th img,.ph img,.pv-sheet,.pv-scrim{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero-photo img{animation:none;opacity:1;transform:none}.reveal{opacity:1;transform:none;transition:none}.name span>i{animation:none;transform:none}.status i::after,.board-h .rec::before{animation:none}.blob,.rep-img img,.card .th img,.ph img,.pv-sheet,.pv-scrim{transition:none}}
 @media (hover:none){.rep:hover .rep-img img,.card:hover .th img,.ph:hover img{transform:none}.rep:hover .rep-go{transform:none}}
 
 /* ── responsive ── */
 @media (max-width:1024px){
   .hero{grid-template-columns:1fr;gap:32px}
+  .hero-r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}.hero-photo{aspect-ratio:auto;min-height:100%}
   .board{display:grid;grid-template-columns:repeat(2,1fr)}
   .board-h{grid-column:1/-1}
   .stat{border-bottom:1px solid var(--border)}
@@ -279,6 +284,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   .row.head .h-ro{display:none}
 }
 @media (max-width:640px){
+  .hero-r{grid-template-columns:1fr}.hero-photo{aspect-ratio:4/3;min-height:0}
   .brand{margin-right:44px}.brand .lgw{height:calc(var(--h)*.8);width:calc(var(--h)*.8*var(--a))}
   .team{margin-right:44px}.team .lgw{height:calc(var(--h)*.8);width:calc(var(--h)*.8*var(--a))}
   .bar .wrap{height:calc(56px + env(safe-area-inset-top,0px))}
@@ -334,13 +340,16 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
           <a class="btn ghost" data-link="msg" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>Send message</a>
         </div>
       </div>
-      <aside class="board" aria-label="At a glance">
-        <div class="board-h"><span>At a glance</span><span class="rec">Open to work</span></div>
-        <div class="stat"><b>05+</b><span>Years<br>designing</span></div>
-        <div class="stat"><b id="projCount">16</b><span>Projects<br>shown</span></div>
-        <div class="stat"><b>25+</b><span>Brands<br>served</span></div>
-        <div class="stat clock"><b id="clock">--:--</b><span>Cairo<br>local time</span></div>
-      </aside>
+      <div class="hero-r">
+        <figure class="hero-photo"><img src="img/hero-photo.webp" alt="Omar Hesham smiling, in a black polo" width="680" height="510" fetchpriority="high"></figure>
+        <aside class="board" aria-label="At a glance">
+          <div class="board-h"><span>At a glance</span><span class="rec">Open to work</span></div>
+          <div class="stat"><b>05+</b><span>Years<br>designing</span></div>
+          <div class="stat"><b id="projCount">16</b><span>Projects<br>shown</span></div>
+          <div class="stat"><b>25+</b><span>Brands<br>served</span></div>
+          <div class="stat clock"><b id="clock">--:--</b><span>Cairo<br>local time</span></div>
+        </aside>
+      </div>
     </section>
 
     <section class="wrap clients" aria-labelledby="clientsH">
