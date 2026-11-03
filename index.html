@@ -188,8 +188,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .team:hover img{filter:none;opacity:1}
 @media (hover:none){.team img{filter:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.track{animation:none;flex-wrap:wrap;width:auto;row-gap:12px}.track [aria-hidden]{display:none}.marquee{-webkit-mask-image:none;mask-image:none}}
-.row .co{display:inline-flex;align-items:center;gap:12px}
-.row .co img{width:30px;height:30px;border-radius:9px;object-fit:cover;flex:none}
 /* experience */
 .score{border:1px solid var(--border);border-radius:20px;overflow:hidden;background:var(--surface)}
 .row{display:grid;grid-template-columns:150px minmax(0,1.2fr) minmax(0,1fr) 140px;gap:16px;align-items:baseline;padding:18px 20px;border-top:1px solid var(--border)}
@@ -477,7 +475,7 @@ document.getElementById('gal').innerHTML=PH.map(([c,f,a],i)=>`<figure class="ph 
 /* Experience — scoreboard */
 const JOBS=[['2026 · now','Momentasoft','Senior Product Designer','Hybrid · Full time','Leading end-to-end product design for B2B and B2C platforms across web and mobile, and maintaining a scalable Figma design system.',1],['2025 · 2026','Adree','Product Designer','Full time'],['2025 · 2026','Ticlick CRM','Product Designer','Part time'],['2025','STC','Product Designer','Contract'],['2024 · 2025','Seam Labs','Product Designer','Full time'],['2022 · 2024','Devexy','UI/UX Designer','Full time'],['2021 · 2022','T-Tech','UI/UX Designer','Full time'],['2020 · 2021','Royal Techni','UI/UX Designer','Full time']];
 const LOGO={'Momentasoft':'momentasoft','Adree':'adree','Ticlick CRM':'ticlick','STC':'stc','Seam Labs':'seam-labs','Devexy':'devexy','T-Tech':'t-tech','Royal Techni':'royal-techni'};
-const rowHTML=([y,c,r,t,d,now])=>`<div class="row${now?' now':''}"><span class="yr">${y}</span><span class="co">${LOGO[c]?`<img src="img/logos/${LOGO[c]}.webp" alt="" width="30" height="30" loading="lazy">`:''}${c}</span><span class="ro">${r}</span><span class="ty">${t}</span>${d?`<p class="ds">${d}</p>`:''}</div>`;
+const rowHTML=([y,c,r,t,d,now])=>`<div class="row${now?' now':''}"><span class="yr">${y}</span><span class="co">${c}</span><span class="ro">${r}</span><span class="ty">${t}</span>${d?`<p class="ds">${d}</p>`:''}</div>`;
 document.getElementById('jobs').innerHTML=`<div class="row head"><span>Years</span><span>Team</span><span class="h-ro">Role</span><span style="text-align:right">Type</span></div>`+JOBS.map(rowHTML).join('');
 /* Teams marquee (from the experience list) */
 const teamHTML=(hide)=>JOBS.map(([y,c])=>`<div class="team"${hide?' aria-hidden="true"':''}><img src="img/logos/${LOGO[c]}.webp" alt="${hide?'':c+' logo'}" width="44" height="44"><b>${c}</b><span>${y}</span></div>`).join('');
