@@ -2,8 +2,8 @@ name: Sync from Figma
 
 on:
   schedule:
-    - cron: '17 * * * *'   # every hour
-  workflow_dispatch:        # "Run workflow" button for instant updates
+    - cron: '*/15 * * * *'   # every 15 minutes
+  workflow_dispatch:          # "Run workflow" button for an instant update
 
 permissions:
   contents: write
@@ -21,17 +21,17 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-save sharp@0.33.5
-      - name: Export project frames from Figma
+      - name: Pull changes from Figma
         env:
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
         run: node scripts/sync-figma.mjs
-      - name: Commit changes (Vercel redeploys automatically)
+      - name: Publish (Vercel redeploys automatically)
         run: |
-          if [ -n "$(git status --porcelain work)" ]; then
+          if [ -n "$(git status --porcelain index.html work img figma-sync.json)" ]; then
             git config user.name "figma-sync[bot]"
             git config user.email "figma-sync@users.noreply.github.com"
-            git add work
-            git commit -m "Sync project screens from Figma"
+            git add index.html work img figma-sync.json
+            git commit -m "Sync from Figma: $(cat .sync-summary 2>/dev/null || echo 'baseline')"
             git push
           else
             echo "Nothing changed in Figma"

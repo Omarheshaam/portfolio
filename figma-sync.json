@@ -20,6 +20,70 @@
     "Gold Bullion": "17-gold-bullion",
     "Adree": "03-admore-b",
     "Lulu's 3": "13-lulus-3",
-    "Valine": "08-valine"
+    "Valine": "08-valine",
+    "Ticlick": "19-ticlick"
+  },
+  "textFrames": [
+    "108:6",
+    "111:258",
+    "108:143",
+    "111:5"
+  ],
+  "photos": {
+    "149:44": {
+      "file": "img/about/squat-wide.webp",
+      "width": 1280,
+      "ref": "ca659caf0e67c7409ac3d32992e0b716c71a3ada"
+    },
+    "149:45": {
+      "file": "img/about/kettlebell-squat.webp",
+      "width": 640,
+      "ref": "2f51783979c06af50ba682ea67c644061500e905"
+    },
+    "149:46": {
+      "file": "img/about/rings.webp",
+      "width": 640,
+      "ref": "c4c7767eb2b07c0745bc5c06704e530c20d20d86"
+    },
+    "149:47": {
+      "file": "img/about/kettlebell-carry.webp",
+      "width": 640,
+      "ref": "a577a85a806bf7c8d36ba7cca2f8683501558b52"
+    },
+    "149:48": {
+      "file": "img/about/ski-erg.webp",
+      "width": 640,
+      "ref": "482aaa0c36491565fa9be34e59acd10e33e5c711"
+    },
+    "149:49": {
+      "file": "img/about/cairo-marathon.webp",
+      "width": 640,
+      "ref": "c0b6293cbd18f1d7a098e4f81d473a16c0ab043b"
+    },
+    "149:50": {
+      "file": "img/about/garage-games.webp",
+      "width": 640,
+      "ref": "c7d5e88283b47ffe70c7a9dad2f35cfa0251bbbb"
+    },
+    "149:51": {
+      "file": "img/about/rower.webp",
+      "width": 640,
+      "ref": "3cf52c17309966d87d79cb6dce137c00b6266f6b"
+    },
+    "149:52": {
+      "file": "img/about/run.webp",
+      "width": 1280,
+      "ref": "fa9c3bdf74356e748429b107881432dc7791dc4c"
+    },
+    "149:53": {
+      "file": "img/about/sandbag.webp",
+      "width": 640,
+      "ref": "d2939f27be1abee75d530c8e89a66a21030ef43c"
+    },
+    "111:399": {
+      "file": "img/portrait-purple.webp",
+      "width": 720,
+      "ref": "be933f58e9c09a0745317efcb349ccf7b55367bc"
+    }
   }
 }
