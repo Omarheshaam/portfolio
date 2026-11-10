@@ -68,11 +68,34 @@ const log = [];
   const inScript = (i) => scriptRanges.some(([a, b]) => i >= a && i < b);
   // A layer is only linked to text that fills a whole element (>…<) or a whole JS string ('…'),
   // so a short word can never be swapped inside a longer one.
+  // (also safe inside the JS template strings that build the Projects page)
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/`/g, '&#96;').replace(/\$\{/g, '$&#123;');
   const forms = {
-    html: (s) => '>' + s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>') + '<',
+    html: (s) => '>' + esc(s).replace(/\n/g, '<br>') + '<',
     js: (s) => "'" + s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ') + "'",
+    // "Senior Product Designer · B2B …" → first dot is the accent-coloured <b>·</b>
+    eyebrow: (s) => '>' + esc(s).replace(' · ', ' <b>·</b> ') + '<',
+    // "OMAR\nHESHAM" → one animated line per row
+    name: (s) => s.split('\n').map((l) => `<span><i>${esc(l)}</i></span>`).join(''),
+    // "Design with intention." / "LET'S BUILD\nSOMETHING real." → last words in the italic accent
+    em1: (s) => emTail(s, 1), em2: (s) => emTail(s, 2), em3: (s) => emTail(s, 3),
   };
+  function emTail(s, k) {
+    const w = esc(s).replace(/\n/g, '<br>').split(' ');
+    if (w.length <= k) return null;
+    return '>' + w.slice(0, -k).join(' ') + ' <em>' + w.slice(-k).join(' ') + '</em><';
+  }
   const count = (hay, needle) => hay.split(needle).length - 1;
+  // find a candidate on the site exactly once (optionally ignoring letter case, for titles that
+  // are typed in capitals in Figma but shown in capitals by CSS on the site)
+  function locate(cand, ci) {
+    if (!cand) return null;
+    if (!ci) return count(html, cand) === 1 ? cand : null;
+    const H = html.toLowerCase(), c = cand.toLowerCase();
+    if (count(H, c) !== 1) return null;
+    const i = H.indexOf(c);
+    return html.slice(i, i + cand.length);
+  }
 
   const doc = await api(`files/${cfg.fileKey}/nodes?ids=${encodeURIComponent(cfg.textFrames.join(','))}`);
   const texts = [];
@@ -88,10 +111,11 @@ const log = [];
     const link = cfg.texts[id];
     if (!link) {
       // New layer: link it if its text appears exactly once on the site (in HTML, or inside the JS data).
-      for (const form of ['html', 'js']) {
-        const s = forms[form](chars);
-        if (count(html, s) === 1 && (form === 'js') === inScript(html.indexOf(s))) {
-          cfg.texts[id] = { last: chars, site: s, form };
+      const tries = [['html', 0], ['js', 0], ['eyebrow', 0], ['html', 1], ['name', 1], ['em1', 1], ['em2', 1], ['em3', 1]];
+      for (const [form, ci] of tries) {
+        const site = locate(forms[form](chars), ci);
+        if (site && (form !== 'js' || inScript(html.indexOf(site)))) {
+          cfg.texts[id] = { last: chars, site, form };
           break;
         }
       }
@@ -99,6 +123,7 @@ const log = [];
     }
     if (chars === link.last) continue;
     const next = forms[link.form](chars);
+    if (!next) { console.warn(`! "${chars.slice(0, 40)}" no longer fits its style on the site — not changed`); continue; }
     const n = count(html, link.site);
     if (n !== 1) { console.warn(`! "${link.site.slice(0, 50)}" found ${n}× on the site — not changed`); continue; }
     html = html.replace(link.site, () => next);
