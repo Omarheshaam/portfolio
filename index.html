@@ -428,7 +428,7 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
 </nav>
 
 <script>
-const LINKS={email:'omar.h.rabea@gmail.com',call:'',msg:'https://wa.me/201158549538',linkedin:'https://www.linkedin.com/in/omarhesham20/'};
+const LINKS={email:'omar.h.rabea@gmail.com',call:'https://cal.com/omarhesham20/30min',msg:'https://wa.me/201158549538',linkedin:'https://www.linkedin.com/in/omarhesham20/'};
 document.querySelectorAll('[data-link]').forEach(a=>{const k=a.dataset.link,v=LINKS[k];
   if(v){a.href=v;a.target='_blank';a.rel='noreferrer'}
   else if(k==='call'){a.href=`mailto:${LINKS.email}?subject=${encodeURIComponent("Let's book a call")}`}
