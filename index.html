@@ -227,11 +227,19 @@ nav.dock{position:fixed;bottom:max(14px,env(safe-area-inset-bottom,0px));left:50
   background:color-mix(in srgb,var(--surface) 62%,transparent);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
   border:1px solid color-mix(in srgb,var(--fg1) 10%,transparent);box-shadow:0 18px 40px -12px rgba(0,0,0,.45),inset 0 1px 0 color-mix(in srgb,#fff 7%,transparent)}
 .dk{--s:44px;position:relative;flex:none;display:flex;align-items:center;justify-content:center;width:var(--s);height:var(--s);border-radius:calc(var(--s) * .28);
-  color:var(--fg2);background:none;border:0;transition:color .2s}
-.dk:hover{color:var(--fg1)}
-.dk.on{color:var(--accent)}
-.dk svg{width:calc(var(--s) * .55);height:calc(var(--s) * .55)}
-.dk::after{content:"";position:absolute;bottom:-5px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}
+  color:#fff;background:var(--g);border:0;box-shadow:0 6px 14px -5px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 5px rgba(0,0,0,.18)}
+.dk::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 52%);pointer-events:none}
+.dk svg{position:relative;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+.dk svg *{stroke-width:2}
+nav.dock .dk[data-route="work"]{--g:linear-gradient(180deg,#9A8BFF,#5B3FE6)}
+nav.dock .dk[data-route="about"]{--g:linear-gradient(180deg,#FF93B9,#EC4380)}
+nav.dock .dk[data-route="experience"]{--g:linear-gradient(180deg,#FFC94F,#F59300)}
+nav.dock .dk[data-route="projects"]{--g:linear-gradient(180deg,#62E691,#18AE5C)}
+nav.dock #mail{--g:linear-gradient(180deg,#73C3FF,#1F7BF2)}
+nav.dock[data-icons="graphite"] .dk{--g:linear-gradient(180deg,#48484B,#1C1C1E)!important}
+nav.dock[data-icons="graphite"] .dk.on{color:#B9A9FF}
+.dk svg{width:calc(var(--s) * .5);height:calc(var(--s) * .5)}
+.dk::after{content:"";position:absolute;bottom:-7px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--fg2);opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}
 .dk.on::after{opacity:1;transform:none}
 .dk.jump{animation:dockJump .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes dockJump{0%,100%{transform:translateY(0)}35%{transform:translateY(-14px)}}
