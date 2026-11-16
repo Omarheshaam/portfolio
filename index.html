@@ -231,15 +231,17 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   background:linear-gradient(180deg,#9483F5 0%,#7A61EE 100%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 12px -6px rgba(90,64,210,.45);
   transition:transform .5s var(--ease),width .5s var(--ease),opacity .3s}
-.dk{position:relative;z-index:1;display:flex;align-items:center;gap:7px;height:40px;padding:0 15px;border-radius:999px;color:var(--fg2);font-size:14px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;transition:color .25s}
+.dk{position:relative;z-index:1;display:flex;align-items:center;gap:7px;height:40px;padding:0 12px;border-radius:999px;color:var(--fg2);font-size:14px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;transition:color .25s}
 .dk:hover{color:var(--fg1)}
 .dk.on{color:#fff}
 .dk svg{width:17px;height:17px;flex:none}
-.dsep{flex:none;width:1px;height:20px;margin:0 3px;background:color-mix(in srgb,var(--fg1) 13%,transparent)}
 .tip{display:none}
-@media (max-width:640px){
-  .dk{padding:0 12px}
-  .dk:not(.on) .lb{display:none}
+/* icons only; the selected page shows its name (all screen sizes) */
+.dk:not(.on) .lb{display:none}
+.dk:not(.on){padding:0 11px}
+@media (hover:hover) and (pointer:fine){
+  .dk:not(.on):hover .lb{display:block;position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);padding:4px 10px;border-radius:999px;font-size:12px;
+    background:var(--surface);color:var(--fg1);border:1px solid var(--border);box-shadow:0 6px 16px -6px rgba(0,0,0,.4);pointer-events:none}
 }
 
 /* ── project sheet ── */
@@ -431,7 +433,6 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
   <a class="dk" href="#about" data-route="about" aria-label="About"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg><span class="lb">About</span></a>
   <a class="dk" href="#experience" data-route="experience" aria-label="Experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg><span class="lb">Experience</span></a>
   <a class="dk" href="#projects" data-route="projects" aria-label="Projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg><span class="lb">Projects</span></a>
-  <span class="dsep" aria-hidden="true"></span>
   <a class="dk" href="mailto:omar.h.rabea@gmail.com" id="mail" aria-label="Email me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.99 5.73a2 2 0 0 1-2.02 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span class="lb" id="mailTip">Email</span></a>
 </nav>
 
