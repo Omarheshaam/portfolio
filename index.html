@@ -222,17 +222,25 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .card span{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--fg3)}
 .card p{margin:0;font-size:13.5px;line-height:1.5;color:var(--fg3)}
 
-/* ── dock (unchanged from v2/v3) ── */
-nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--border);border-radius:999px;background:color-mix(in srgb,var(--surface) 80%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.goo{position:absolute;inset:4px;pointer-events:none;filter:url(#nav-goo)}
-.blob{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--accent-soft);transition:transform .45s var(--ease)}
-.blob.b{transform:scale(0)}
-.dk{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;color:var(--fg3);transition:color .2s}
-.dk:hover{color:var(--fg1)}.dk.on{color:var(--accent)}
-.dk svg{width:20px;height:20px}
-.tip{position:absolute;top:-36px;left:50%;transform:translate(-50%,4px);white-space:nowrap;padding:4px 10px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--fg1);font-size:11.5px;font-weight:500;letter-spacing:-.01em;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
-.dk:hover .tip,.dk:focus-visible .tip,.dk.flash .tip{opacity:1;transform:translate(-50%,0)}
-@media (hover:none){.dk:hover .tip{opacity:0}.dk.flash .tip{opacity:1;transform:translate(-50%,0)}}
+/* ── dock: glass pill with labels, glowing active pill ── */
+nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:2px;padding:5px;border-radius:999px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--elevated) 82%,transparent),color-mix(in srgb,var(--surface) 82%,transparent));
+  -webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
+  border:1px solid color-mix(in srgb,var(--fg1) 9%,transparent);box-shadow:0 18px 44px -14px rgba(0,0,0,.6),inset 0 1px 0 color-mix(in srgb,#fff 8%,transparent)}
+.pill{position:absolute;top:5px;left:0;height:40px;width:0;border-radius:999px;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,#9483F5 0%,#7A61EE 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 12px -6px rgba(90,64,210,.45);
+  transition:transform .5s var(--ease),width .5s var(--ease),opacity .3s}
+.dk{position:relative;z-index:1;display:flex;align-items:center;gap:7px;height:40px;padding:0 15px;border-radius:999px;color:var(--fg2);font-size:14px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;transition:color .25s}
+.dk:hover{color:var(--fg1)}
+.dk.on{color:#fff}
+.dk svg{width:17px;height:17px;flex:none}
+.dsep{flex:none;width:1px;height:20px;margin:0 3px;background:color-mix(in srgb,var(--fg1) 13%,transparent)}
+.tip{display:none}
+@media (max-width:640px){
+  .dk{padding:0 12px}
+  .dk:not(.on) .lb{display:none}
+}
 
 /* ── project sheet ── */
 .pv{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) var(--gutR) max(16px,env(safe-area-inset-bottom,0px)) var(--gut)}
@@ -305,7 +313,6 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="nav-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>
 </svg>
 
 <header class="bar" id="bar">
@@ -419,12 +426,13 @@ nav.dock{position:fixed;bottom:max(16px,env(safe-area-inset-bottom,0px));left:50
 </main>
 
 <nav class="dock" aria-label="Primary">
-  <div class="goo" aria-hidden="true"><div class="blob a" id="blobA"></div><div class="blob b" id="blobB"></div></div>
-  <a class="dk" href="#" data-route="work" aria-label="Work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="tip">Work</span></a>
-  <a class="dk" href="#about" data-route="about" aria-label="About"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg><span class="tip">About</span></a>
-  <a class="dk" href="#experience" data-route="experience" aria-label="Experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg><span class="tip">Experience</span></a>
-  <a class="dk" href="#projects" data-route="projects" aria-label="Projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg><span class="tip">Projects</span></a>
-  <a class="dk" href="mailto:omar.h.rabea@gmail.com" id="mail" aria-label="Email me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.99 5.73a2 2 0 0 1-2.02 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span class="tip" id="mailTip">Email me</span></a>
+  <span class="pill" id="pill" aria-hidden="true"></span>
+  <a class="dk" href="#" data-route="work" aria-label="Work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="lb">Work</span></a>
+  <a class="dk" href="#about" data-route="about" aria-label="About"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg><span class="lb">About</span></a>
+  <a class="dk" href="#experience" data-route="experience" aria-label="Experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg><span class="lb">Experience</span></a>
+  <a class="dk" href="#projects" data-route="projects" aria-label="Projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg><span class="lb">Projects</span></a>
+  <span class="dsep" aria-hidden="true"></span>
+  <a class="dk" href="mailto:omar.h.rabea@gmail.com" id="mail" aria-label="Email me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.99 5.73a2 2 0 0 1-2.02 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><span class="lb" id="mailTip">Email</span></a>
 </nav>
 
 <script>
@@ -526,22 +534,26 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 
 /* Router + dock (same behaviour as before) */
 const views=[...document.querySelectorAll('.view')],docks=[...document.querySelectorAll('.dk[data-route]')];
-const blobA=document.getElementById('blobA'),blobB=document.getElementById('blobB');
+const pill=document.getElementById('pill');
 function route(){const h=location.hash.slice(1);const r=['about','experience','projects'].includes(h)?h:'work';
   views.forEach(v=>v.classList.toggle('on',v.dataset.view===r));
-  docks.forEach((d,i)=>{const on=d.dataset.route===r;d.classList.toggle('on',on);if(on)blobA.style.transform=`translateX(${i*44}px)`});
+  docks.forEach(d=>{const on=d.dataset.route===r;d.classList.toggle('on',on);if(on)d.setAttribute('aria-current','page');else d.removeAttribute('aria-current')});
+  placePill();
   window.scrollTo({top:0,behavior:'instant'});
   const v=views.find(v=>v.dataset.view===r);v.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
   if(r==='work'){v.querySelectorAll('.name span>i').forEach(i=>{i.style.animation='none';void i.offsetWidth;i.style.animation='';});}}
 document.querySelectorAll('[data-route="work"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();if(location.hash){location.hash=''}else{route()}}));
 addEventListener('hashchange',route);
 const nav=document.querySelector('nav.dock');
-[...nav.querySelectorAll('.dk')].forEach((d,i)=>d.addEventListener('mouseenter',()=>{blobB.style.transform=`translateX(${i*44}px) scale(1)`}));
-nav.addEventListener('mouseleave',()=>{blobB.style.transform=blobA.style.transform+' scale(0)'});
+/* glowing pill slides to the selected page */
+function placePill(){const on=document.querySelector('nav.dock .dk.on');if(!on)return;
+  pill.style.width=on.offsetWidth+'px';pill.style.transform=`translateX(${on.offsetLeft}px)`;pill.style.opacity=1;}
+addEventListener('resize',placePill);
+document.fonts&&document.fonts.ready.then(placePill);
 
 /* Email copy */
 const copy=(btnText,el,label)=>{try{navigator.clipboard.writeText(LINKS.email).then(()=>{el.textContent=label;setTimeout(()=>el.textContent=btnText,1400)},()=>{})}catch(e){}};
-document.getElementById('mail').addEventListener('click',()=>{const t=document.getElementById('mailTip'),d=t.parentElement;copy('Email me',t,'Copied');d.classList.add('flash');setTimeout(()=>d.classList.remove('flash'),1400);});
+document.getElementById('mail').addEventListener('click',()=>{const t=document.getElementById('mailTip'),d=t.parentElement;copy('Email',t,'Copied');d.classList.add('flash');setTimeout(()=>d.classList.remove('flash'),1400);});
 document.getElementById('copyMail').addEventListener('click',e=>copy('Copy email',e.currentTarget,'Copied ✓'));
 
 /* Click sound */
