@@ -443,13 +443,13 @@ document.querySelectorAll('[data-link]').forEach(a=>{const k=a.dataset.link,v=LI
   else if(k==='call'){a.href=`mailto:${LINKS.email}?subject=${encodeURIComponent("Let's book a call")}`}
   else a.remove();});
 
-const TAGS={'Ad More':['Website','Ad tech','Analytics'],'Sasco':['Mobile','Loyalty','Arabic · RTL'],'Aligna':['Web app','Health','Sign-in'],"Lulu's":['Mobile','Food & retail','Ordering'],'Valine|Mobile app':['Mobile','Health','Nutrition'],'Jusor':['Website','Logistics'],'E‑wallet':['Mobile','Fintech','Payments'],'KACCC':['Website','Culture','Arabic · RTL'],'RF9':['Mobile','Fitness','Personal project'],'Broker el Arab':['Website','Fintech','Arabic · RTL'],'EZ Insurance':['Web app','Insurance','Payments'],'Bosts':['Mobile','Logistics','Merchants'],'Alyusr':['Website','Fintech','Arabic · RTL'],'Gold Bullion':['Mobile','Fintech','Arabic · RTL'],'Adree':['Website','B2B','SaaS'],'Ticlick':['Website','SaaS','CRM'],'Valine|Website':['Website','Food & retail']};
+const TAGS={'GeoAds':['Website','Ad tech','Analytics'],'Sasco':['Mobile','Loyalty','Arabic · RTL'],'Aligna':['Web app','Health','Sign-in'],"Lulu's":['Mobile','Food & retail','Ordering'],'Valine|Mobile app':['Mobile','Health','Nutrition'],'Jusor':['Website','Logistics'],'E‑wallet':['Mobile','Fintech','Payments'],'KACCC':['Website','Culture','Arabic · RTL'],'RF9':['Mobile','Fitness','Personal project'],'Broker el Arab':['Website','Fintech','Arabic · RTL'],'EZ Insurance':['Web app','Insurance','Payments'],'Bosts':['Mobile','Logistics','Merchants'],'Alyusr':['Website','Fintech','Arabic · RTL'],'Gold Bullion':['Mobile','Fintech','Arabic · RTL'],'Adree':['Website','B2B','SaaS'],'Ticlick':['Website','SaaS','CRM'],'Valine|Website':['Website','Food & retail']};
 /* Case studies: CASE['RF9']={problem:'…',approach:'…',outcome:'…'} — shown only when present */
 const CASE={};
 /* Translation hooks (filled in the Arabic build) */
 const TT={},TAGT={},DT={};const tt=t=>TT[t]||t;
 const P=[
-  {f:'02-admore-a',n:'Ad More',t:'Website',d:'Ad performance platform: smart targeting, geolocation and real-time campaign insights.'},
+  {f:'02-admore-a',n:'GeoAds',t:'Website',d:'Ad performance platform: smart targeting, geolocation and real-time campaign insights.'},
   {f:'10-sasco',n:'Sasco',t:'Mobile app',d:'Fuel and retail loyalty app: wallet balance, points, station services and live fuel prices, in Arabic.'},
   {f:'01-aligna',n:'Aligna',t:'Web app',d:'Sign-in experience for a clear-aligner platform.'},
   {f:'11-lulus-1',n:"Lulu's",t:'Mobile app',d:'Café ordering app: menu, product customisation, basket and checkout.'},
